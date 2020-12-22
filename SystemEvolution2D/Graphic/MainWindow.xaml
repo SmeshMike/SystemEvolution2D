@@ -5,11 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Graphic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280"
+        Title="Huita" Height="720" Width="1323"
         Loaded="WindowLoaded"
         KeyDown="WindowKeyDown">
+
     <Grid>
+        <Button Content="Run"
+                HorizontalAlignment="Right"
+                Margin="0,615,10,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="RunButtonClick"/>
+        <Button Content="Stop"
+                HorizontalAlignment="Right"
+                Margin="0,650,10,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="StopButtonClick"/>
         <Viewport3D Grid.Row="0" Grid.Column="0"
-                    Name="MainViewport" />
+                    Name="MainViewport" Margin="0,0,68,10" />
+        <TextBlock TextWrapping="Wrap"
+                   Margin="0,10,35,649"
+                   HorizontalAlignment="Right" Width="12" TextAlignment="Right">
+            <Run FontSize="13" >A</Run>
+        </TextBlock>
+        <TextBox MaxLength="20"
+                 Width="26"
+                 Margin="0,10,4,649"
+                 HorizontalAlignment="Right"
+                 Text="1"
+                 x:Name="ATextBox" TextAlignment="Right"/>
+        <TextBlock TextWrapping="Wrap"
+                   Margin="0,69,35,578"
+                   HorizontalAlignment="Right" Width="22" TextAlignment="Right">
+            <Run FontSize="13" >B</Run>
+        </TextBlock>
+        <TextBox MaxLength="20"
+                 Width="26"
+                 Margin="0,71,4,587"
+                 HorizontalAlignment="Right"
+                 Text="1"
+                 x:Name="BTextBox" TextAlignment="Right"/>
+        <TextBlock TextWrapping="Wrap"
+            Margin="0,130,35,517"
+            HorizontalAlignment="Right" Width="22" TextAlignment="Right"><Run FontSize="13" Text="C" /></TextBlock>
+        <TextBox MaxLength="20"
+            Width="26"
+            Margin="0,132,4,526"
+            HorizontalAlignment="Right"
+            Text="0,4"
+            x:Name="CTextBox" TextAlignment="Right"/>
     </Grid>
 </Window>

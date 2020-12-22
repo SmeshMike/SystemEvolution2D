@@ -33,6 +33,9 @@ namespace Graphic
 
         // The camera.
         private PerspectiveCamera _theCamera;
+        private double a;
+        private double b;
+        private double c;
 
         // The camera's current location.
         private double _cameraPhi = Math.PI / 6.0;       // 30 degrees
@@ -56,21 +59,13 @@ namespace Graphic
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             // Give the camera its initial position.
-            _theCamera = new PerspectiveCamera {FieldOfView = 80};
+            _theCamera = new PerspectiveCamera {FieldOfView = 120};
             MainViewport.Camera = _theCamera;
             PositionCamera();
 
-            // Define lights.
-            DefineLights();
 
-            // Create the model.
-            DefineModel(MainModel3Dgroup);
 
-            // Add the group of models to a ModelVisual3D.
-            var modelVisual = new ModelVisual3D {Content = MainModel3Dgroup};
-
-            // Add the main visual to the viewportt.
-            MainViewport.Children.Add(modelVisual);
+           
         }
 
         // Define the lights.
@@ -85,6 +80,8 @@ namespace Graphic
         // Add the model to the Model3DGroup.
         private void DefineModel(Model3DGroup modelGroup)
         {
+            // Define lights.
+            DefineLights();
             // Make a mesh to hold the surface.
             var mesh = new MeshGeometry3D();
 
@@ -134,14 +131,10 @@ namespace Graphic
         }
 
         // The function that defines the surface we are drawing.
-        private static double F(double x, double z)
+        private double F(double x, double z)
         {
-
-            const double twoPi = 2 * 3.14159265;
-            var r2 = x * x + z * z;
-            var r = Math.Sqrt(r2);
-            var theta = Math.Atan2(z, x);
-            return Math.Exp(-r2) * Math.Sin(twoPi * r) * Math.Cos(3 * theta);
+            var f = 1.5 * Math.Exp(-(x * x) / (2 * c * c)) * Math.Exp(-(z * z) / (2 * c * c));
+            return f;
 
             //double r2 = x * x + z * z;
             //return 8 * Math.Cos(r2 / 2) / (2 + r2);
@@ -220,6 +213,42 @@ namespace Graphic
             _theCamera.UpDirection = new Vector3D(0, 1, 0);
 
             // Console.WriteLine("Camera.Position: (" + x + ", " + y + ", " + z + ")");
+        }
+
+        private void RunButtonClick(object sender, RoutedEventArgs e)
+        {
+            var aCond = double.TryParse(ATextBox.Text, out a);
+            var bCond = double.TryParse(BTextBox.Text, out b);
+            var cCond = double.TryParse(CTextBox.Text, out c);
+
+            if (!aCond && !bCond && !cCond)
+            {
+                MessageBox.Show("Проверьте введённые значения");
+                return;
+            }
+
+
+            ATextBox.IsEnabled = false;
+            BTextBox.IsEnabled = false;
+            CTextBox.IsEnabled = false;
+            // Create the model.
+            DefineModel(MainModel3Dgroup);
+
+            // Add the group of models to a ModelVisual3D.
+            var modelVisual = new ModelVisual3D { Content = MainModel3Dgroup };
+
+            // Add the main visual to the viewportt.
+            MainViewport.Children.Add(modelVisual);
+        }
+
+        private void StopButtonClick(object sender, RoutedEventArgs e)
+        {
+            ATextBox.IsEnabled = true;
+            BTextBox.IsEnabled = true;
+            CTextBox.IsEnabled = true;
+
+            MainModel3Dgroup.Children.Clear();
+            MainViewport.Children.Clear();
         }
         public void Eee()
         {
