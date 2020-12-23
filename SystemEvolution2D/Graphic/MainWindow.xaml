@@ -33,7 +33,7 @@
                  Width="26"
                  Margin="0,10,4,649"
                  HorizontalAlignment="Right"
-                 Text="1"
+                 Text="2"
                  x:Name="ATextBox" TextAlignment="Right"/>
         <TextBlock TextWrapping="Wrap"
                    Margin="0,69,35,578"
@@ -44,7 +44,7 @@
                  Width="26"
                  Margin="0,71,4,587"
                  HorizontalAlignment="Right"
-                 Text="1"
+                 Text="2"
                  x:Name="BTextBox" TextAlignment="Right"/>
         <TextBlock TextWrapping="Wrap"
             Margin="0,130,35,517"

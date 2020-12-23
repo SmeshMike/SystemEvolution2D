@@ -46,15 +46,15 @@ namespace Graphic
         private bool go;
 
         
-        const double dt = 0.002;
+        const double dt = 0.02;
 
         // Make the surface's points and triangles.
-        const double xMin = -1.5;
-        const double xMax = 1.5;
-        const double dx = 0.025;
-        const double zMin = -1.5;
-        const double zMax = 1.5;
-        const double dz = 0.025;
+        const double xMin = -2;
+        const double xMax = 2;
+        const double dx = 0.5;
+        const double zMin = -2;
+        const double zMax = 2;
+        const double dz = 0.5;
 
         private double[] x, z;
         Complex[][] psi; // Волновая функция
@@ -234,10 +234,10 @@ namespace Graphic
                     // Make points at the corners of the surface
                     // over (x, z) - (x + dx, z + dz).
 
-                    var p00 = new Point3D(x[i], psi[i][j].Real, z[j]);
-                    var p10 = new Point3D(x[i + 1], psi[i + 1][j].Real, z[j]);
-                    var p01 = new Point3D(x[i], psi[i][j + 1].Real, z[j + 1]);
-                    var p11 = new Point3D(x[i + 1], psi[i + 1][j + 1].Real, z[j + 1]);
+                    var p00 = new Point3D(x[i], psi[i][j].Magnitude, z[j]);
+                    var p10 = new Point3D(x[i + 1], psi[i + 1][j].Magnitude, z[j]);
+                    var p01 = new Point3D(x[i], psi[i][j + 1].Magnitude, z[j + 1]);
+                    var p11 = new Point3D(x[i + 1], psi[i + 1][j + 1].Magnitude, z[j + 1]);
 
                     // Add the triangles.
                     AddTriangle(mesh, p00, p01, p11);
@@ -382,7 +382,7 @@ namespace Graphic
         private void EvolutionButtonClick(object sender, RoutedEventArgs e)
         {
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Start();
            
         }
